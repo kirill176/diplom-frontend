@@ -31,6 +31,7 @@ export const AuthAPI = createApi({
       query: () => ({
         url: `/${AuthRoutes.Refresh}`,
         method: EMethodt.GET,
+        credentials: "include",
       }),
     }),
   }),
