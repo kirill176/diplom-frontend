@@ -15,14 +15,6 @@ type BaseQueryWithReauthFn = BaseQueryFn<
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
-  prepareHeaders: (headers) => {
-    const token = localStorage.getItem("accessToken");
-
-    if (token) {
-      headers.set("Authorization", `Bearer ${JSON.parse(token)}`);
-    }
-    return headers;
-  },
 });
 
 const baseQueryWithReauth: BaseQueryWithReauthFn = async (
@@ -35,13 +27,15 @@ const baseQueryWithReauth: BaseQueryWithReauthFn = async (
 
   if (error && error.status === 401) {
     const refreshResult = await api
-      .dispatch(AuthAPI.endpoints.refresh.initiate(args))
+      .dispatch(AuthAPI.endpoints.refresh.initiate({}))
       .unwrap();
 
     if (refreshResult && refreshResult.data) {
       const {
-        data: { accessToken },
+        data: { accessToken, user },
       } = refreshResult;
+      console.log(user);
+
       localStorage.setItem("accessToken", JSON.stringify(accessToken));
     }
   }

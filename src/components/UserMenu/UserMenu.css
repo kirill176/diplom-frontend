@@ -1,0 +1,6 @@
+.list-item {
+  [class^="icon"] {
+    width: 20px;
+    height: 50px;
+  }
+}

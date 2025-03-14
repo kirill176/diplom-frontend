@@ -30,7 +30,7 @@ const AuthForm: FC<AuthFormProps> = ({ type }) => {
           email,
           password,
         }).unwrap();
-        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("accessToken", JSON.stringify(accessToken));
         dispatch(loginned());
         dispatch(loginUser(user));
         navigate("/");
