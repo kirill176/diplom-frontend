@@ -13,6 +13,7 @@ const authSlice = createSlice({
     },
     logouted: (state) => {
       state.isAuthenticated = false;
+      localStorage.clear();
     },
   },
   extraReducers: (builder) => {
