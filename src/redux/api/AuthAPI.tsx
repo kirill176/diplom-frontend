@@ -11,6 +11,7 @@ export const AuthAPI = createApi({
         url: `/${AuthRoutes.Login}`,
         method: EMethodt.POST,
         body,
+        credentials: "include",
       }),
     }),
     registration: build.mutation({
@@ -18,13 +19,14 @@ export const AuthAPI = createApi({
         url: `${AuthRoutes.Registration}`,
         method: EMethodt.POST,
         body,
+        credentials: "include",
       }),
     }),
     logout: build.mutation({
-      query: (body) => ({
+      query: () => ({
         url: `${AuthRoutes.Logout}`,
         method: EMethodt.POST,
-        body,
+        credentials: "include",
       }),
     }),
     refresh: build.query({

@@ -1,3 +1,17 @@
+#root {
+  overflow: hidden;
+  height: 100vh;
+}
+
+[class^="icon"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    vertical-align: middle;
+  }
+}
+
 .icon-logo {
   max-width: 80px;
 }

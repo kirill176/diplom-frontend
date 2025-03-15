@@ -4,12 +4,14 @@ type UserType = {
   id: string;
   email: string;
   isActivated: boolean;
+  userName: string;
 };
 
 const initialState: UserType = {
   id: "",
   email: "",
   isActivated: false,
+  userName: "",
 };
 
 const userSlice = createSlice({
