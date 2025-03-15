@@ -44,7 +44,6 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 backgroundColor: "rgba(0, 0, 0, 0.1)",
                 cursor: "pointer",
               },
-              padding: "12px 16px",
               fontWeight: "bold",
             }}
           >
@@ -56,6 +55,8 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 display: "flex",
                 gap: "8px",
                 alignItems: "center",
+                padding: "12px 16px",
+                width: "100%",
               }}
             >
               <IconProfile />
@@ -69,7 +70,6 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 backgroundColor: "rgba(0, 0, 0, 0.1)",
                 cursor: "pointer",
               },
-              padding: "12px 16px",
               fontWeight: "bold",
             }}
           >
@@ -82,6 +82,8 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 display: "flex",
                 gap: "8px",
                 alignItems: "center",
+                padding: "12px 16px",
+                width: "100%",
               }}
             >
               <IconLogout />
