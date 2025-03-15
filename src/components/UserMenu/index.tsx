@@ -6,6 +6,9 @@ import { FC } from "react";
 import IconProfile from "../../icons/IconProfile/IconProfile";
 import IconLogout from "../../icons/IconLogout/IconLogout";
 import "./UserMenu.css";
+import { useAppDispatch } from "../../hooks/redux";
+import { logoutUser } from "../../redux/reducers/userReducer";
+import { logouted } from "../../redux/reducers/authReducer";
 
 type UserMenuProps = {
   setIsShow: (param: boolean) => void;
@@ -14,9 +17,12 @@ type UserMenuProps = {
 const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
   const [logout] = useLogoutMutation();
   const ref = useClickOutside(() => setIsShow(false));
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     logout({});
+    dispatch(logoutUser());
+    dispatch(logouted());
   };
 
   return (
