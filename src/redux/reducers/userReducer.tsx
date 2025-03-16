@@ -5,6 +5,8 @@ type UserType = {
   email: string;
   isActivated: boolean;
   userName: string;
+  diskSpace: number;
+  usedSpace: number;
 };
 
 const initialState: UserType = {
@@ -12,6 +14,8 @@ const initialState: UserType = {
   email: "",
   isActivated: false,
   userName: "",
+  diskSpace: 0,
+  usedSpace: 0,
 };
 
 const userSlice = createSlice({
