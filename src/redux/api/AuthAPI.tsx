@@ -29,7 +29,7 @@ export const AuthAPI = createApi({
         credentials: "include",
       }),
     }),
-    refresh: build.query({
+    refresh: build.mutation({
       query: () => ({
         url: `/${AuthRoutes.Refresh}`,
         method: EMethodt.GET,
@@ -43,5 +43,5 @@ export const {
   useLoginMutation,
   useRegistrationMutation,
   useLogoutMutation,
-  useRefreshQuery,
+  useRefreshMutation,
 } = AuthAPI;

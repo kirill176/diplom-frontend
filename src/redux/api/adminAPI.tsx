@@ -7,6 +7,7 @@ import {
 import { baseUrl } from "../../constants/api";
 import { AuthAPI } from "./AuthAPI";
 import { redirectToLogin } from "../reducers/resirectReducer";
+import { AuthRoutes } from "../../models/api";
 
 type BaseQueryWithReauthFn = BaseQueryFn<
   string | FetchArgs,
@@ -16,6 +17,7 @@ type BaseQueryWithReauthFn = BaseQueryFn<
 
 const baseQuery = fetchBaseQuery({
   baseUrl: baseUrl,
+  credentials: "include",
   prepareHeaders: (headers) => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -30,27 +32,39 @@ const baseQueryWithReauth: BaseQueryWithReauthFn = async (
   api,
   extraOptions
 ) => {
-  let result = await baseQuery(args, api, extraOptions);
+  const result = await baseQuery(args, api, extraOptions);
   const { error } = result;
 
+  console.log("Base Query Error:", error);
+
   if (error?.status === 401) {
-    console.warn("refresh token");
+    console.warn("Unauthorized: Trying to refresh token...");
 
-    const refreshResult = await api
-      .dispatch(AuthAPI.endpoints.refresh.initiate({}))
-      .unwrap()
-      .catch((err) => {
-        console.error(err);
-        return null;
-      });
+    if (
+      typeof args === "object" &&
+      "url" in args &&
+      args.url.includes(AuthRoutes.Refresh)
+    ) {
+      console.error("Refresh token failed. Logging out...");
+      api.dispatch(redirectToLogin());
+      return result;
+    }
 
-    if (refreshResult) {
+    try {
+      const refreshResult = await api
+        .dispatch(AuthAPI.endpoints.refresh.initiate(null))
+        .unwrap();
+
       const { accessToken } = refreshResult;
-      localStorage.setItem("accessToken", JSON.stringify(accessToken));
 
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      console.warn("refresh failed");
+      if (accessToken) {
+        console.log("Token refreshed successfully");
+        localStorage.setItem("accessToken", JSON.stringify(accessToken));
+      } else {
+        throw new Error("Failed to refresh token");
+      }
+    } catch (err) {
+      console.error("Refresh token failed:", err);
       api.dispatch(redirectToLogin());
     }
   }
