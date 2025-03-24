@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQueryWithReauth from "./adminAPI";
-import { EMethodt } from "../../models/api";
+import { EMethod } from "../../models/api";
 
 export const UserAPI = createApi({
   reducerPath: "userAPI",
@@ -9,8 +9,7 @@ export const UserAPI = createApi({
     getUser: build.query({
       query: () => ({
         url: `/user`,
-        method: EMethodt.GET,
-        credentials: "include",
+        method: EMethod.GET,
       }),
     }),
   }),

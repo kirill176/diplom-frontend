@@ -15,3 +15,20 @@
 .icon-logo {
   max-width: 80px;
 }
+
+*::-webkit-scrollbar-thumb {
+  background: silver;
+  border-radius: 4px;
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar {
+  border-radius: 4px;
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: snow;
+}

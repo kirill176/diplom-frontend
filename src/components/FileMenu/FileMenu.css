@@ -1,0 +1,18 @@
+.file-menu {
+  .list-item {
+    font-weight: "bold";
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    [class^="icon"] {
+      width: 15px;
+      height: 15px;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}

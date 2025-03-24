@@ -16,7 +16,6 @@ export const useGetUser = () => {
 
   useEffect(() => {
     if (data || isAuthenticated) {
-      navigate("/");
       dispatch(loginned());
       dispatch(loginUser(data));
     }

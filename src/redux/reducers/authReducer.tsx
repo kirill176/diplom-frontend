@@ -15,15 +15,18 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.clear();
     },
+    resetRedirect: (state) => {
+      state.shouldRedirect = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(redirectToLogin.fulfilled, (state) => {
       state.isAuthenticated = false;
-      state.shouldRedirect = false;
+      state.shouldRedirect = true;
     });
   },
 });
 
-export const { loginned, logouted } = authSlice.actions;
+export const { loginned, logouted, resetRedirect } = authSlice.actions;
 
 export default authSlice.reducer;

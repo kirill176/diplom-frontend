@@ -5,16 +5,13 @@ import { useClickOutside } from "../../hooks/useClickOutside";
 import { FC } from "react";
 import IconProfile from "../../icons/IconProfile/IconProfile";
 import IconLogout from "../../icons/IconLogout/IconLogout";
-import "./UserMenu.css";
 import { useAppDispatch } from "../../hooks/redux";
 import { logoutUser } from "../../redux/reducers/userReducer";
 import { logouted } from "../../redux/reducers/authReducer";
+import { MenuProps } from "../../models/menu";
+import "./UserMenu.css";
 
-type UserMenuProps = {
-  setIsShow: (param: boolean) => void;
-};
-
-const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
+const UserMenu: FC<MenuProps> = ({ setIsShow }) => {
   const [logout] = useLogoutMutation();
   const ref = useClickOutside(() => setIsShow(false));
   const dispatch = useAppDispatch();
@@ -28,13 +25,14 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
   return (
     <Box
       ref={ref}
+      className="user-menu"
       sx={{
         position: "absolute",
         top: "100%",
         right: "0%",
         border: "1px solid #ddd",
         borderRadius: "8px",
-        backgroundColor: "#fff",
+        backgroundColor: "white",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
         zIndex: 1000,
         width: "200px",
@@ -43,16 +41,7 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
     >
       <Box component="span" sx={{ display: "flex", flexDirection: "column" }}>
         <List sx={{ padding: 0, margin: 0 }}>
-          <ListItem
-            className="list-item"
-            sx={{
-              "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-                cursor: "pointer",
-              },
-              fontWeight: "bold",
-            }}
-          >
+          <ListItem className="list-item">
             <Link
               to="/profile"
               style={{
@@ -61,7 +50,7 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 display: "flex",
                 gap: "8px",
                 alignItems: "center",
-                padding: "12px 16px",
+                padding: "0 8px",
                 width: "100%",
               }}
             >
@@ -69,16 +58,7 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
               Profile
             </Link>
           </ListItem>
-          <ListItem
-            className="list-item"
-            sx={{
-              "&:hover": {
-                backgroundColor: "rgba(0, 0, 0, 0.1)",
-                cursor: "pointer",
-              },
-              fontWeight: "bold",
-            }}
-          >
+          <ListItem className="list-item">
             <Link
               to="/login"
               onClick={handleLogout}
@@ -88,7 +68,7 @@ const UserMenu: FC<UserMenuProps> = ({ setIsShow }) => {
                 display: "flex",
                 gap: "8px",
                 alignItems: "center",
-                padding: "12px 16px",
+                padding: "0 8px",
                 width: "100%",
               }}
             >

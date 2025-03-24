@@ -3,8 +3,19 @@ import LogoComponent from "../../components/Auth/LogoComponent";
 import AuthForm from "../../components/Auth/AuthForm";
 import { Link } from "react-router-dom";
 import { AuthRoutes } from "../../models/api";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { resetRedirect } from "../../redux/reducers/authReducer";
 
 const LoginPage = () => {
+  const { shouldRedirect } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (shouldRedirect) {
+      dispatch(resetRedirect());
+    }
+  }, [shouldRedirect]);
+
   return (
     <Box
       sx={{
