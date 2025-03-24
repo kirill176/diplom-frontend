@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
 
-const GenerateModal: FC<ModalProps> = ({ id, name, closeModal }) => {
+const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
   const [password, setPassword] = useState<string>("");
   const { linkGeneration, link } = useFile();
   const handleGenerate = () => {
