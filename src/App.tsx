@@ -8,6 +8,7 @@ import ThemeButton from "./components/ThemeButton";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { useEffect } from "react";
 import { logoutUser } from "./redux/reducers/userReducer";
+import DownloadPage from "./pages/DownloadPage";
 
 function App() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/download/:link" element={<DownloadPage />} />
       </Routes>
       <ThemeButton />
     </>

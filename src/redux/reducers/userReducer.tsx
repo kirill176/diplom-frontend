@@ -1,21 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type UserType = {
-  id: string;
-  email: string;
-  isActivated: boolean;
-  userName: string;
-  diskSpace: number;
-  usedSpace: number;
-};
+import { FileType, UserType } from "../../models/user";
 
 const initialState: UserType = {
-  id: "",
+  _id: "",
   email: "",
   isActivated: false,
   userName: "",
   diskSpace: 0,
   usedSpace: 0,
+  files: [],
 };
 
 const userSlice = createSlice({
@@ -29,9 +22,12 @@ const userSlice = createSlice({
     logoutUser() {
       return initialState;
     },
+    refetchFiles(state, action: PayloadAction<FileType[]>) {
+      state.files = action.payload;
+    },
   },
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, refetchFiles } = userSlice.actions;
 
 export default userSlice.reducer;

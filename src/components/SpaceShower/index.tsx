@@ -1,12 +1,11 @@
 import { Box, LinearProgress, Typography } from "@mui/material";
 import { useAppSelector } from "../../hooks/redux";
-import { bytesToGb } from "../../utils/bytesToGb";
+import { bytesToGb } from "../../utils/transformBytes";
 
 const SpaceShower = () => {
   const { diskSpace, usedSpace } = useAppSelector((state) => state.user);
 
   const usedPercentage = diskSpace ? (usedSpace / diskSpace) * 100 : 0;
-  console.log(bytesToGb(diskSpace));
 
   return (
     <Box>
