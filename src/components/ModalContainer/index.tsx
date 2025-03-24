@@ -31,7 +31,6 @@ const ModalContainer = () => {
   });
 
   const modalRoot = document.getElementById("modal-root");
-  console.log(component);
 
   if (!modalRoot || !component) return null;
 
