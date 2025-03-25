@@ -7,10 +7,10 @@ import { loginUser } from "../redux/reducers/userReducer";
 
 export const useGetUser = () => {
   const token = localStorage.getItem("accessToken");
-  const { data } = useGetUserQuery({}, { skip: !token });
   const { isAuthenticated } = useAppSelector(
     (state: { auth: { isAuthenticated: boolean } }) => state.auth
   );
+  const { data } = useGetUserQuery({}, { skip: !token || isAuthenticated });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

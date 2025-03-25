@@ -6,6 +6,8 @@ import { FileType } from "../../models/user";
 const FileList = () => {
   const { files } = useAppSelector((state) => state.user);
 
+  if (!files || files.length === 0) return null;
+
   return (
     <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
       <Box

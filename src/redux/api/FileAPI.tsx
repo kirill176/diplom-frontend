@@ -38,8 +38,14 @@ export const FileAPI = createApi({
         url: `/${FileRoutes.DownloadFile}`,
         method: EMethod.POST,
         body,
-        responseType: "blob",
+        responseHandler: async (response: Response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.blob();
+        },
       }),
+      transformResponse: (response: Blob) => URL.createObjectURL(response),
     }),
   }),
 });

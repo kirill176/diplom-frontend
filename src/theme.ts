@@ -1,5 +1,20 @@
 import { createTheme, ThemeOptions } from "@mui/material";
 
+declare module "@mui/material/styles" {
+  interface Palette {
+    customColors: {
+      shadow: string;
+      border: string;
+    };
+  }
+  interface PaletteOptions {
+    customColors?: {
+      shadow?: string;
+      border?: string;
+    };
+  }
+}
+
 const commonThemeSettings: ThemeOptions = {
   typography: {
     fontFamily: "Poppins, Arial, sans-serif",
@@ -49,6 +64,10 @@ export const lightTheme = createTheme({
       default: "#f5f5f5",
       paper: "#ffffff",
     },
+    customColors: {
+      shadow: "rgba(0, 0, 0, 0.1)",
+      border: "1px solid #ABBDE0",
+    },
     text: {
       primary: "#000000",
       secondary: "#555555",
@@ -67,10 +86,10 @@ export const lightTheme = createTheme({
           borderRadius: "8px",
           borderColor: "#ABBDE0",
           borderWidth: "2px",
-          color: "#1976d2",
           fontWeight: "500",
           padding: "8px 16px",
           "&:hover": {
+            color: "#1976d2",
             backgroundColor: "#e3f2fd",
             borderColor: "#1976d2",
           },
@@ -101,6 +120,9 @@ export const lightTheme = createTheme({
           borderRadius: "12px",
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           padding: "16px",
+          "&:hover": {
+            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+          },
         },
       },
     },
@@ -129,6 +151,10 @@ export const darkTheme = createTheme({
     background: {
       default: "#121212",
       paper: "#1e1e1e",
+    },
+    customColors: {
+      shadow: "rgba(33, 150, 243, 0.5)",
+      border: "1px solid #4A5568",
     },
     text: {
       primary: "#ffffff",

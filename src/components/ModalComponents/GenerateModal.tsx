@@ -1,18 +1,25 @@
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
 import { ModalProps } from "../../models/modal";
-import { FC, useState } from "react";
+import { FC, FormEvent, useState } from "react";
 import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
 
 const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
   const [password, setPassword] = useState<string>("");
   const { linkGeneration, link } = useFile();
-  const handleGenerate = () => {
+  const handleGenerate = (e: FormEvent) => {
+    e.preventDefault();
     linkGeneration(id, password);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(link);
   };
 
   return (
     <Box
+      component="form"
+      onSubmit={handleGenerate}
       sx={{
         padding: "16px",
         width: "100%",
@@ -51,7 +58,7 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
             }}
           >
             <Typography sx={{ width: "100%" }}>{link}</Typography>
-            <IconButton sx={{ width: "40px" }}>
+            <IconButton sx={{ width: "40px" }} onClick={handleCopy}>
               <IconCopy />
             </IconButton>
           </Box>
@@ -67,13 +74,13 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
       >
         <Button
           variant="contained"
+          type="submit"
           sx={{
             color: "background.paper",
             fontWeight: 600,
             textTransform: "capitalize",
             "&:hover": { color: "text.primary" },
           }}
-          onClick={handleGenerate}
           disabled={password.length === 0}
         >
           Generate

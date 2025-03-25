@@ -5,12 +5,12 @@ import useFile from "../../hooks/useFile";
 import { useState } from "react";
 
 const DownloadPage = () => {
-  const { link } = useParams();
+  const { filename, link } = useParams();
   const { downloadFile } = useFile();
   const [password, setPassword] = useState<string>("");
 
   const handleDownload = () => {
-    downloadFile(password, link as string);
+    downloadFile(password, link as string, filename as string);
   };
 
   return (
@@ -47,8 +47,8 @@ const DownloadPage = () => {
           </Typography>
         </Box>
 
-        <Typography variant="body1" mb={2}>
-          Enter password to download your file:
+        <Typography variant="body1" mb={2} sx={{ textAlign: "center" }}>
+          Enter password to download this file:
         </Typography>
 
         <TextField
@@ -66,14 +66,12 @@ const DownloadPage = () => {
 
         <Button
           variant="contained"
-          color="primary"
           fullWidth
           sx={{
             marginTop: 2,
             padding: "10px 0",
             fontSize: "16px",
             borderRadius: 2,
-            textTransform: "none",
           }}
           onClick={handleDownload}
         >
