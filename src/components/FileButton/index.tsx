@@ -12,14 +12,27 @@ const FileButton = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "right", paddingTop: "16px" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "right",
+        padding: "16px 0",
+        alignItems: "center",
+        gap: "16px",
+      }}
+    >
       {fileName && (
         <Typography variant="body2" color="textSecondary">
-          Выбран файл: {fileName}
+          Selected file: {fileName}
         </Typography>
       )}
 
-      <Button variant="outlined" component="label" disabled={loading}>
+      <Button
+        variant="contained"
+        component="label"
+        disabled={loading}
+        sx={{ minWidth: "115px", minHeight: "45px" }}
+      >
         {loading ? (
           <CircularProgress size={24} color="inherit" />
         ) : (

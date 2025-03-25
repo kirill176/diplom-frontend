@@ -41,21 +41,35 @@ const AuthForm: FC<AuthFormProps> = ({ type }) => {
   };
 
   return (
-    <Box component="form" onSubmit={onSubmit}>
+    <Box
+      component="form"
+      onSubmit={onSubmit}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           gap: "15px",
-          marginY: "25px",
+          marginY: "20px",
         }}
       >
         <TextField
           label="Email"
           type="email"
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          variant="outlined"
+          sx={{
+            borderRadius: "8px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "8px",
+            },
           }}
         />
         <TextField
@@ -63,10 +77,29 @@ const AuthForm: FC<AuthFormProps> = ({ type }) => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          fullWidth
+          variant="outlined"
+          sx={{
+            borderRadius: "8px",
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "8px",
+            },
+          }}
         />
       </Box>
-      <Button type="submit" variant="outlined" sx={{ width: "100%" }}>
-        {type === AuthRoutes.Login ? "Login" : "Registration"}
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={password.length === 0 || email.length === 0}
+        sx={{
+          width: "100%",
+          padding: "12px",
+          fontSize: "16px",
+          borderRadius: "8px",
+          textTransform: "none",
+        }}
+      >
+        {type === AuthRoutes.Login ? "Login" : "Register"}
       </Button>
     </Box>
   );

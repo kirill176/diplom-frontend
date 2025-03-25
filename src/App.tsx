@@ -30,7 +30,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/download/:link" element={<DownloadPage />} />
+        <Route path="/download/:filename/:link" element={<DownloadPage />} />
       </Routes>
       <ThemeButton />
     </>

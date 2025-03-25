@@ -6,6 +6,7 @@ import {
   useGetFileListMutation,
   useRemoveFileMutation,
 } from "../redux/api/FileAPI";
+import { saveAs } from "file-saver";
 import { useAppDispatch } from "./redux";
 import { refetchFiles } from "../redux/reducers/userReducer";
 
@@ -66,16 +67,20 @@ const useFile = () => {
   const linkGeneration = async (fileId: string, password: string) => {
     try {
       const { data } = await generateLink({ fileId, password });
-      setLink(data);
+      setLink(data.link);
     } catch (error) {
       console.error("Error generate link", error);
     }
   };
 
-  const downloadFile = async (password: string, link: string) => {
+  const downloadFile = async (
+    password: string,
+    link: string,
+    filename: string
+  ) => {
     try {
-      const response = await download({ password, link });
-      console.log(response);
+      const result: string = await download({ password, link }).unwrap();
+      saveAs(result, filename);
     } catch (error) {
       console.error("Error loading file", error);
     }
