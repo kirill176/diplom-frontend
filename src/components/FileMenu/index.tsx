@@ -32,7 +32,7 @@ const FileMenu: FC<FileMenuProps> = ({ setIsShow, id, name }) => {
         position: "absolute",
         top: "100%",
         right: "0",
-        backgroundColor: "white",
+        backgroundColor: "background.paper",
         border: "1px solid #ddd",
         borderRadius: "8px",
         boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",

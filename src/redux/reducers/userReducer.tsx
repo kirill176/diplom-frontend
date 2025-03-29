@@ -24,6 +24,11 @@ const userSlice = createSlice({
     },
     refetchFiles(state, action: PayloadAction<FileType[]>) {
       state.files = action.payload;
+      const usedSp = action.payload.reduce(
+        (sum: number, file: FileType) => sum + file.size,
+        0
+      );
+      state.usedSpace = usedSp;
     },
   },
 });

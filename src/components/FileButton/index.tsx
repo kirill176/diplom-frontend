@@ -33,11 +33,9 @@ const FileButton = () => {
         disabled={loading}
         sx={{ minWidth: "115px", minHeight: "45px" }}
       >
-        {loading ? (
-          <CircularProgress size={24} color="inherit" />
-        ) : (
-          "Upload File"
-        )}
+        {loading
+          ? "Uploading" + <CircularProgress size={24} color="inherit" />
+          : "Upload File"}
         <input type="file" hidden onChange={handleUpladFile} />
       </Button>
 

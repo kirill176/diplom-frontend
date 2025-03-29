@@ -1,4 +1,4 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { FC, FormEvent, useState } from "react";
 import {
   useLoginMutation,
@@ -9,6 +9,7 @@ import { useAppDispatch } from "../../hooks/redux";
 import { loginned } from "../../redux/reducers/authReducer";
 import { loginUser } from "../../redux/reducers/userReducer";
 import { useNavigate } from "react-router-dom";
+import { getErrorMessage } from "../../utils/getErrors";
 
 type AuthFormProps = {
   type: AuthRoutes;
@@ -17,8 +18,9 @@ type AuthFormProps = {
 const AuthForm: FC<AuthFormProps> = ({ type }) => {
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [login] = useLoginMutation();
-  const [registration] = useRegistrationMutation();
+  const [login, { error: loginError }] = useLoginMutation();
+  const [registration, { error: registrationError }] =
+    useRegistrationMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const onSubmit = async (e: FormEvent) => {
@@ -86,7 +88,18 @@ const AuthForm: FC<AuthFormProps> = ({ type }) => {
             },
           }}
         />
+        {loginError && (
+          <Typography variant="body2" color="error">
+            Error: {getErrorMessage(loginError)}
+          </Typography>
+        )}
+        {registrationError && (
+          <Typography variant="body2" color="error">
+            Error: {getErrorMessage(registrationError)}
+          </Typography>
+        )}
       </Box>
+
       <Button
         type="submit"
         variant="contained"
@@ -99,7 +112,7 @@ const AuthForm: FC<AuthFormProps> = ({ type }) => {
           textTransform: "none",
         }}
       >
-        {type === AuthRoutes.Login ? "Login" : "Register"}
+        {type === AuthRoutes.Login ? "Login" : "Registration"}
       </Button>
     </Box>
   );

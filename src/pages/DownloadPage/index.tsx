@@ -1,16 +1,26 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import IconLogo from "../../icons/IconLogo/IconLogo";
-import useFile from "../../hooks/useFile";
+import { saveAs } from "file-saver";
 import { useState } from "react";
+import { useDownloadFileMutation } from "../../redux/api/FileAPI";
+import { getErrorMessage } from "../../utils/getErrors";
 
 const DownloadPage = () => {
   const { filename, link } = useParams();
-  const { downloadFile } = useFile();
+  const [download, { isLoading, error }] = useDownloadFileMutation();
   const [password, setPassword] = useState<string>("");
 
-  const handleDownload = () => {
-    downloadFile(password, link as string, filename as string);
+  const downloadFile = async () => {
+    const result = await download({ password, link }).unwrap();
+    saveAs(result, filename);
   };
 
   return (
@@ -27,6 +37,7 @@ const DownloadPage = () => {
         elevation={6}
         sx={{
           maxWidth: 480,
+          minWidth: 400,
           padding: 4,
           borderRadius: 3,
           textAlign: "center",
@@ -63,7 +74,15 @@ const DownloadPage = () => {
             },
           }}
         />
-
+        {error && (
+          <Typography
+            variant="body2"
+            color="error"
+            style={{ marginTop: "10px" }}
+          >
+            Error: {getErrorMessage(error)}
+          </Typography>
+        )}
         <Button
           variant="contained"
           fullWidth
@@ -73,9 +92,14 @@ const DownloadPage = () => {
             fontSize: "16px",
             borderRadius: 2,
           }}
-          onClick={handleDownload}
+          disabled={isLoading}
+          onClick={downloadFile}
         >
-          Download
+          {isLoading ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Download File"
+          )}
         </Button>
       </Paper>
     </Box>
