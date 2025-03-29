@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
   useAddFileMutation,
-  useDownloadFileMutation,
   useGenerateLinkMutation,
   useGetFileListMutation,
   useRemoveFileMutation,
 } from "../redux/api/FileAPI";
-import { saveAs } from "file-saver";
 import { useAppDispatch } from "./redux";
 import { refetchFiles } from "../redux/reducers/userReducer";
 
@@ -15,7 +13,6 @@ const useFile = () => {
   const [deleteFile] = useRemoveFileMutation();
   const [getFilesList] = useGetFileListMutation();
   const [generateLink] = useGenerateLinkMutation();
-  const [download] = useDownloadFileMutation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string>("");
@@ -73,19 +70,6 @@ const useFile = () => {
     }
   };
 
-  const downloadFile = async (
-    password: string,
-    link: string,
-    filename: string
-  ) => {
-    try {
-      const result: string = await download({ password, link }).unwrap();
-      saveAs(result, filename);
-    } catch (error) {
-      console.error("Error loading file", error);
-    }
-  };
-
   return {
     loading,
     error,
@@ -93,7 +77,6 @@ const useFile = () => {
     uploadFile,
     removeFile,
     linkGeneration,
-    downloadFile,
     link,
   };
 };

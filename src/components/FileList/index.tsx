@@ -2,11 +2,12 @@ import { Box } from "@mui/material";
 import { useAppSelector } from "../../hooks/redux";
 import FileComponent from "../FileComponent";
 import { FileType } from "../../models/user";
+import EmptyComponent from "../EmtyComponent";
 
 const FileList = () => {
   const { files } = useAppSelector((state) => state.user);
 
-  if (!files || files.length === 0) return null;
+  if (!files || files.length === 0) return <EmptyComponent />;
 
   return (
     <Box sx={{ flexGrow: 1, overflowY: "auto" }}>

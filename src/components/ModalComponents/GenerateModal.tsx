@@ -49,15 +49,29 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
           <Box
             sx={{
               width: "100%",
+              maxWidth: "300px",
               display: "flex",
               gap: "8px",
               alignItems: "center",
               border: "1px solid black",
-              borderRadius: "16px",
+              borderRadius: "8px",
               padding: "0 8px",
+              overflow: "hidden",
             }}
           >
-            <Typography sx={{ width: "100%" }}>{link}</Typography>
+            <Typography
+              sx={{
+                width: "100%",
+                whiteSpace: "nowrap",
+                overflow: "scroll",
+                scrollbarWidth: "none",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              {link}
+            </Typography>
             <IconButton sx={{ width: "40px" }} onClick={handleCopy}>
               <IconCopy />
             </IconButton>

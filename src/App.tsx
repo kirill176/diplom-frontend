@@ -2,7 +2,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage";
-import { useGetUser } from "./hooks/useGetUser";
 import Profile from "./pages/ProfilePage";
 import ThemeButton from "./components/ThemeButton";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
@@ -14,7 +13,6 @@ function App() {
   const navigate = useNavigate();
   const { shouldRedirect } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  useGetUser();
 
   useEffect(() => {
     if (shouldRedirect) {

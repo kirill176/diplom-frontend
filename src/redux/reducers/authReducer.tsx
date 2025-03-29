@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { redirectToLogin } from "./resirectReducer";
+import { redirectToLogin } from "./redirectReducer";
 
 const authSlice = createSlice({
   name: "auth",

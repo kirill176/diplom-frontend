@@ -3,8 +3,10 @@ import LogoComponent from "../../components/Auth/LogoComponent";
 import AuthForm from "../../components/Auth/AuthForm";
 import { Link } from "react-router-dom";
 import { AuthRoutes } from "../../models/api";
+import { useGetUser } from "../../hooks/useGetUser";
 
 const RegistrationPage = () => {
+  useGetUser();
   return (
     <Paper
       elevation={6}

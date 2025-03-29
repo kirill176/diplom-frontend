@@ -6,13 +6,21 @@ import {
 } from "@reduxjs/toolkit/query";
 import { baseUrl } from "../../constants/api";
 import { AuthAPI } from "./AuthAPI";
-import { redirectToLogin } from "../reducers/resirectReducer";
+import { redirectToLogin } from "../reducers/redirectReducer";
 import { AuthRoutes } from "../../models/api";
+
+export type ApiError = {
+  data: {
+    errors: [];
+    message: string;
+  };
+  status: number;
+};
 
 type BaseQueryWithReauthFn = BaseQueryFn<
   string | FetchArgs,
   unknown,
-  FetchBaseQueryError
+  FetchBaseQueryError | ApiError
 >;
 
 const baseQuery = fetchBaseQuery({
@@ -32,10 +40,8 @@ const baseQueryWithReauth: BaseQueryWithReauthFn = async (
   api,
   extraOptions
 ) => {
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
   const { error } = result;
-
-  console.log("Base Query Error:", error);
 
   if (error?.status === 401) {
     console.warn("Unauthorized: Trying to refresh token...");
@@ -60,6 +66,7 @@ const baseQueryWithReauth: BaseQueryWithReauthFn = async (
       if (accessToken) {
         console.log("Token refreshed successfully");
         localStorage.setItem("accessToken", JSON.stringify(accessToken));
+        result = await baseQuery(args, api, extraOptions);
       } else {
         throw new Error("Failed to refresh token");
       }

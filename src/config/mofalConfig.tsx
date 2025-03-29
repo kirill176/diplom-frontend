@@ -1,8 +1,10 @@
 import { lazy } from "react";
 import { ModalType } from "../models/modal";
-import GenerateModal from "../components/ModalComponents/GenerateModal";
 const DeleteModal = lazy(
   () => import("../components/ModalComponents/DeleteModal")
+);
+const GenerateModal = lazy(
+  () => import("../components/ModalComponents/GenerateModal")
 );
 
 const config = {
@@ -33,7 +35,6 @@ const getModalConfig = ({
 }) => {
   const modalConfig = config[type as keyof typeof config];
   if (!modalConfig || !id) return [];
-  console.log("component", modalConfig.component(id, name, closeModal));
   return [modalConfig.component(id, name, closeModal), modalConfig.title];
 };
 
