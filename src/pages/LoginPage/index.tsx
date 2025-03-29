@@ -6,12 +6,10 @@ import { AuthRoutes } from "../../models/api";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { resetRedirect } from "../../redux/reducers/authReducer";
-import { useGetUser } from "../../hooks/useGetUser";
 
 const LoginPage = () => {
   const { shouldRedirect } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  useGetUser();
   useEffect(() => {
     if (shouldRedirect) {
       dispatch(resetRedirect());
