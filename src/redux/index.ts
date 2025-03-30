@@ -6,7 +6,6 @@ import UserReducer from "./reducers/userReducer";
 import ThemeReducer from "./reducers/themeReducer";
 import ModalReducer from "./reducers/modalReducer";
 import FileOperationReducer from "./reducers/fileOperationReducer";
-import FilesGridReducer from "./reducers/filesGridReducer";
 import { UserAPI } from "./api/UserAPI";
 import { FileAPI } from "./api/FileAPI";
 
@@ -20,7 +19,6 @@ export const store = configureStore({
     theme: ThemeReducer,
     modal: ModalReducer,
     fileId: FileOperationReducer,
-    filesGrid: FilesGridReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

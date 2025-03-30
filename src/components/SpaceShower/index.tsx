@@ -26,7 +26,7 @@ const SpaceShower = () => {
             },
           }}
         />
-        <Typography sx={{ display: "block" }}>
+        <Typography sx={{ display: "block", textWrap: "nowrap" }}>
           {usedPercentage.toFixed(2)}% used
         </Typography>
       </Box>

@@ -40,7 +40,7 @@ export const FileAPI = createApi({
         body,
         responseHandler: async (response: Response) => {
           if (!response.ok) {
-            throw new Error(response.statusText);
+            return await response.json();
           }
           return response.blob();
         },
