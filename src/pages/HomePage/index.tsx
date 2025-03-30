@@ -27,6 +27,7 @@ const HomePage: FC = () => {
             justifyContent: "space-between",
             alignItems: "center",
             width: "100%",
+            gap: "8px",
           }}
         >
           <SpaceShower />

@@ -19,10 +19,22 @@ const FileButton = () => {
         padding: "16px 0",
         alignItems: "center",
         gap: "16px",
+        overflow: "hidden",
+        flexGrow: 1,
       }}
     >
       {fileName && (
-        <Typography variant="body2" color="textSecondary">
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          sx={{
+            width: "100%",
+            flexGrow: 1,
+            textWrap: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
           Selected file: {fileName}
         </Typography>
       )}
@@ -33,9 +45,11 @@ const FileButton = () => {
         disabled={loading}
         sx={{ minWidth: "115px", minHeight: "45px" }}
       >
-        {loading
-          ? "Uploading" + <CircularProgress size={24} color="inherit" />
-          : "Upload File"}
+        {loading ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          "Upload File"
+        )}
         <input type="file" hidden onChange={handleUpladFile} />
       </Button>
 
