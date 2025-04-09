@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FileType, UserType } from "../../models/user";
+import { FileType, LinkType, UserType } from "../../models/user";
 
 const initialState: UserType = {
   _id: "",
@@ -9,6 +9,7 @@ const initialState: UserType = {
   diskSpace: 0,
   usedSpace: 0,
   files: [],
+  generatedLinks: [],
 };
 
 const userSlice = createSlice({
@@ -30,9 +31,14 @@ const userSlice = createSlice({
       );
       state.usedSpace = usedSp;
     },
+    addGenerateLink(state, action: PayloadAction<LinkType>) {
+      console.log(action.payload);
+      state.generatedLinks.unshift(action.payload);
+    },
   },
 });
 
-export const { loginUser, logoutUser, refetchFiles } = userSlice.actions;
+export const { loginUser, logoutUser, refetchFiles, addGenerateLink } =
+  userSlice.actions;
 
 export default userSlice.reducer;

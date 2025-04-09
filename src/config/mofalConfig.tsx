@@ -1,11 +1,6 @@
-import { lazy } from "react";
+import DeleteModal from "../components/ModalComponents/DeleteModal";
+import GenerateModal from "../components/ModalComponents/GenerateModal";
 import { ModalType } from "../models/modal";
-const DeleteModal = lazy(
-  () => import("../components/ModalComponents/DeleteModal")
-);
-const GenerateModal = lazy(
-  () => import("../components/ModalComponents/GenerateModal")
-);
 
 const config = {
   [ModalType.Delete]: {

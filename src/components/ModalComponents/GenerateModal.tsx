@@ -3,13 +3,22 @@ import { ModalProps } from "../../models/modal";
 import { FC, FormEvent, useState } from "react";
 import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
   const [password, setPassword] = useState<string>("");
+  const [expDate, setExpDate] = useState<Date | null>(() => {
+    const now = new Date();
+    now.setHours(now.getHours() + 24);
+    return now;
+  });
   const { linkGeneration, link } = useFile();
   const handleGenerate = (e: FormEvent) => {
     e.preventDefault();
-    linkGeneration(id, password);
+    e.stopPropagation();
+    linkGeneration(id, password, expDate);
+    console.log(expDate);
   };
 
   const handleCopy = () => {
@@ -25,7 +34,7 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
         width: "100%",
       }}
     >
-      <Box sx={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <TextField
           label="File password"
           type="password"
@@ -36,6 +45,14 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
           }}
           sx={{ width: "100%" }}
         />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Expiration Date"
+            value={expDate}
+            minDate={new Date()}
+            onChange={(date) => setExpDate(date)}
+          />
+        </LocalizationProvider>
         <Box
           sx={{
             width: "100%",
