@@ -1,4 +1,4 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import { Suspense, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import IconClose from "../../icons/IconClose";
@@ -76,7 +76,7 @@ const ModalContainer = () => {
               <IconClose />
             </IconButton>
           </Box>
-          <Suspense>{component}</Suspense>
+          <Suspense fallback={<CircularProgress />}>{component}</Suspense>
         </Box>
       )}
     </>,

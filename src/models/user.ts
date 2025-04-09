@@ -8,6 +8,16 @@ export type FileType = {
   createdAt: string;
 };
 
+export type LinkType = {
+  _id: string;
+  expirationDate: string;
+  fileName: string;
+  link: string;
+  createdAt: string;
+  used: boolean;
+  attempts: number;
+};
+
 export type UserType = {
   _id: string;
   email: string;
@@ -16,4 +26,5 @@ export type UserType = {
   diskSpace: number;
   usedSpace: number;
   files: FileType[];
+  generatedLinks: LinkType[];
 };

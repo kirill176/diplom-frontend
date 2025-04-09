@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { FC } from "react";
 import IconAttention from "../../icons/IconAttention";
 import "./AttentionMessage.css";
@@ -9,9 +9,9 @@ type AttentionMessageProps = {
 
 const AttentionMessage: FC<AttentionMessageProps> = ({ message }) => {
   return (
-    <Box
-      sx={{
-        backgroundColor: "#faf3e1",
+    <Paper
+      sx={(theme) => ({
+        backgroundColor: theme.palette.mode === "light" ? "#fff8e1" : "#4a3f1e",
         borderRadius: "8px",
         width: "100%",
         padding: "16px",
@@ -19,11 +19,15 @@ const AttentionMessage: FC<AttentionMessageProps> = ({ message }) => {
         display: "flex",
         alignItems: "center",
         gap: "16px",
-      }}
+        color: theme.palette.text.primary,
+        border: `1px solid ${
+          theme.palette.mode === "light" ? "#ffe082" : "#705c2a"
+        }`,
+      })}
     >
       <IconAttention />
-      <Typography>{message}</Typography>
-    </Box>
+      <Typography variant="h6">{message}</Typography>
+    </Paper>
   );
 };
 

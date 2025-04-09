@@ -134,10 +134,71 @@ export const lightTheme = createTheme({
         },
       },
     },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          borderRadius: "8px",
+          border: "none",
+        },
+      },
+    },
     MuiToolbar: {
       styleOverrides: {
         root: {
           color: "#000",
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#f5f5f5",
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        head: {
+          borderTop: "1px solid #ddd",
+          overflow: "hidden",
+          "&:first-of-type": {
+            borderRadius: "8px 0 0 0",
+          },
+          "&:last-child": {
+            borderRadius: "0 8px 0 0",
+          },
+        },
+        root: {
+          padding: "12px 16px",
+          color: "#000",
+          textAlign: "center",
+          verticalAlign: "middle",
+          border: "1px solid #ddd",
+          borderTop: "none",
+          borderRight: "none",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#f0f0f0",
+          },
+          "&:last-child": {
+            borderRight: "1px solid #ddd",
+          },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          "&:nth-of-type(even)": {
+            backgroundColor: "#f9f9f9",
+          },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          fontSize: "14px",
         },
       },
     },
@@ -221,10 +282,57 @@ export const darkTheme = createTheme({
         },
       },
     },
-    MuiToolbar: {
+    MuiTable: {
       styleOverrides: {
         root: {
-          color: "#FFF",
+          borderRadius: "8px",
+          border: "none",
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#333",
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        head: {
+          borderTop: "1px solid #ddd",
+          overflow: "hidden",
+          "&:first-of-type": {
+            borderRadius: "8px 0 0 0",
+          },
+          "&:last-child": {
+            borderRadius: "0 8px 0 0",
+          },
+        },
+        root: {
+          padding: "12px 16px",
+          color: "#fff",
+          textAlign: "center",
+          verticalAlign: "middle",
+          border: "1px solid #ddd",
+          borderTop: "none",
+          borderRight: "none",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#444",
+          },
+          "&:last-child": {
+            borderRight: "1px solid #ddd",
+          },
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          "&:nth-of-type(even)": {
+            backgroundColor: "#2c2c2c",
+          },
         },
       },
     },

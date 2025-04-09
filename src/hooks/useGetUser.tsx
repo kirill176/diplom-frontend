@@ -10,7 +10,7 @@ export const useGetUser = () => {
   const { isAuthenticated } = useAppSelector(
     (state: { auth: { isAuthenticated: boolean } }) => state.auth
   );
-  const { data } = useGetUserQuery({}, { skip: !token || isAuthenticated });
+  const { data } = useGetUserQuery({}, { skip: !token });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

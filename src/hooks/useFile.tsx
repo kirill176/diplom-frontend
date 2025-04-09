@@ -6,7 +6,7 @@ import {
   useRemoveFileMutation,
 } from "../redux/api/FileAPI";
 import { useAppDispatch } from "./redux";
-import { refetchFiles } from "../redux/reducers/userReducer";
+import { addGenerateLink, refetchFiles } from "../redux/reducers/userReducer";
 
 const useFile = () => {
   const [addFile] = useAddFileMutation();
@@ -61,10 +61,15 @@ const useFile = () => {
     }
   };
 
-  const linkGeneration = async (fileId: string, password: string) => {
+  const linkGeneration = async (
+    fileId: string,
+    password: string,
+    date: Date | null
+  ) => {
     try {
-      const { data } = await generateLink({ fileId, password });
+      const { data } = await generateLink({ fileId, password, date });
       setLink(data.link);
+      dispatch(addGenerateLink(data));
     } catch (error) {
       console.error("Error generate link", error);
     }
