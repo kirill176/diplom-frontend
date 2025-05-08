@@ -30,5 +30,6 @@
 }
 
 *::-webkit-scrollbar-track {
+  border-radius: 4px;
   background: snow;
 }
