@@ -18,4 +18,5 @@ export enum FileRoutes {
   GetFiles = "get-files",
   GenerateLink = "generate-link",
   DownloadFile = "download-file",
+  DeactivateLink = "deativate-link",
 }

@@ -1,5 +1,6 @@
 import {
   Chip,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -13,12 +14,20 @@ import { FC, useState } from "react";
 import { baseUrl } from "../../constants/api";
 import { format } from "date-fns";
 import { useAppSelector } from "../../hooks/redux";
+import IconDeactivate from "../../icons/IconDeactivate";
+import { useDeactivateLinkMutation } from "../../redux/api/FileAPI";
+import { useGetUser } from "../../hooks/useGetUser";
 
 const GridTable: FC = () => {
   const { generatedLinks } = useAppSelector((state) => state.user);
   const [clickedLink, setClickedLink] = useState<string | null>(null);
+  const [deactivate] = useDeactivateLinkMutation();
+  const refetch = useGetUser();
+  const handleDeactivate = async (id: string) => {
+    await deactivate({ id });
+    await refetch();
+  };
 
-  console.log(generatedLinks);
   const handleCopy = (link: string) => {
     setClickedLink(link);
     navigator.clipboard.writeText(`${baseUrl}/download/${link}`);
@@ -36,7 +45,7 @@ const GridTable: FC = () => {
       }}
     >
       <Table sx={{ borderCollapse: "separate" }}>
-        <TableHead sx={{ position: "sticky", top: "0.1px" }}>
+        <TableHead sx={{ position: "sticky", top: "0.1px", zIndex: 1 }}>
           <TableRow>
             <TableCell sx={{ fontWeight: 600 }}>Link</TableCell>
             <TableCell sx={{ fontWeight: 600 }}>File</TableCell>
@@ -44,6 +53,7 @@ const GridTable: FC = () => {
             <TableCell sx={{ fontWeight: 600 }}>Expires</TableCell>
             <TableCell sx={{ fontWeight: 600 }}>Status</TableCell>
             <TableCell sx={{ fontWeight: 600 }}>Attempts</TableCell>
+            <TableCell sx={{ fontWeight: 600 }}>Deactivate</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -100,7 +110,8 @@ const GridTable: FC = () => {
                       : "Not used"
                   }
                   color={
-                    link.attempts > 3
+                    link.attempts > 3 ||
+                    new Date(link.expirationDate) <= new Date()
                       ? "error"
                       : link.used
                       ? "success"
@@ -118,6 +129,34 @@ const GridTable: FC = () => {
                   size="small"
                 />
               </TableCell>
+              <Tooltip
+                onClick={() => handleDeactivate(link._id)}
+                title={
+                  link.attempts > 3 ||
+                  new Date(link.expirationDate) <= new Date()
+                    ? "Link already expired"
+                    : "Click to deactivate link"
+                }
+                arrow={false}
+                enterDelay={500}
+              >
+                <TableCell>
+                  <IconButton
+                    sx={{ maxWidth: 35 }}
+                    disabled={
+                      link.attempts > 3 ||
+                      new Date(link.expirationDate) <= new Date()
+                    }
+                  >
+                    <IconDeactivate
+                      disabled={
+                        link.attempts > 3 ||
+                        new Date(link.expirationDate) <= new Date()
+                      }
+                    />
+                  </IconButton>
+                </TableCell>
+              </Tooltip>
             </TableRow>
           ))}
         </TableBody>

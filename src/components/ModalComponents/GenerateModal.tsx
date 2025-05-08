@@ -5,6 +5,7 @@ import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { useGetUser } from "../../hooks/useGetUser";
 
 const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
   const [password, setPassword] = useState<string>("");
@@ -14,11 +15,12 @@ const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
     return now;
   });
   const { linkGeneration, link } = useFile();
-  const handleGenerate = (e: FormEvent) => {
+  const refresh = useGetUser();
+  const handleGenerate = async (e: FormEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    linkGeneration(id, password, expDate);
-    console.log(expDate);
+    await linkGeneration(id, password, expDate);
+    await refresh();
   };
 
   const handleCopy = () => {

@@ -33,6 +33,13 @@ export const FileAPI = createApi({
         body,
       }),
     }),
+    deactivateLink: build.mutation({
+      query: (body) => ({
+        url: `/${FileRoutes.DeactivateLink}`,
+        method: EMethod.POST,
+        body,
+      }),
+    }),
     downloadFile: build.mutation({
       query: (body) => ({
         url: `/${FileRoutes.DownloadFile}`,
@@ -56,4 +63,5 @@ export const {
   useGetFileListMutation,
   useGenerateLinkMutation,
   useDownloadFileMutation,
+  useDeactivateLinkMutation,
 } = FileAPI;

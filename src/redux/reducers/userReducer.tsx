@@ -32,8 +32,13 @@ const userSlice = createSlice({
       state.usedSpace = usedSp;
     },
     addGenerateLink(state, action: PayloadAction<LinkType>) {
-      console.log(action.payload);
       state.generatedLinks.unshift(action.payload);
+    },
+    deactivateLink(state, action: PayloadAction<string>) {
+      const link = state.generatedLinks.find((el) => el._id === action.payload);
+      if (link) {
+        link.expirationDate = "0";
+      }
     },
   },
 });
