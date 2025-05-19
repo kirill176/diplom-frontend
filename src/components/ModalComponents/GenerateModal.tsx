@@ -1,19 +1,20 @@
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
-import { GenerateProps } from "../../models/modal";
 import { FC, FormEvent, useState } from "react";
 import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useGetUser } from "../../hooks/useGetUser";
+import { ModalProps } from "../../models/modal";
 
-const GenerateModal: FC<GenerateProps> = ({ id, closeModal }) => {
+const GenerateModal: FC<ModalProps> = ({ id, name, closeModal }) => {
   const [password, setPassword] = useState<string>("");
   const [expDate, setExpDate] = useState<Date | null>(() => {
     const now = new Date();
     now.setHours(now.getHours() + 24);
     return now;
   });
+  console.log(name);
   const { linkGeneration, link } = useFile();
   const refresh = useGetUser();
   const handleGenerate = async (e: FormEvent) => {
