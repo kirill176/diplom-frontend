@@ -5,6 +5,6 @@ export enum ModalType {
 
 export type ModalProps = {
   id: string;
-  name: string;
   closeModal: () => void;
+  name?: string;
 };
