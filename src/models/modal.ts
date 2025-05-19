@@ -3,8 +3,13 @@ export enum ModalType {
   Delete = "delete",
 }
 
+export type GenerateProps = {
+  id: string;
+  closeModal: () => void;
+};
+
 export type ModalProps = {
   id: string;
   closeModal: () => void;
-  name?: string;
+  name: string;
 };

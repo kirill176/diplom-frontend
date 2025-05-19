@@ -1,5 +1,5 @@
 import { Box, Button, IconButton, TextField, Typography } from "@mui/material";
-import { ModalProps } from "../../models/modal";
+import { GenerateProps } from "../../models/modal";
 import { FC, FormEvent, useState } from "react";
 import IconCopy from "../../icons/IconCopy";
 import useFile from "../../hooks/useFile";
@@ -7,7 +7,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { useGetUser } from "../../hooks/useGetUser";
 
-const GenerateModal: FC<ModalProps> = ({ id, closeModal }) => {
+const GenerateModal: FC<GenerateProps> = ({ id, closeModal }) => {
   const [password, setPassword] = useState<string>("");
   const [expDate, setExpDate] = useState<Date | null>(() => {
     const now = new Date();
