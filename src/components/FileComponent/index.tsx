@@ -81,6 +81,7 @@ const FileComponent: FC<FileType> = (file) => {
           width: "30px",
           height: "30px",
         }}
+        name="file-menu"
         onClick={() => setIsShow(!isShow)}
       >
         <IconDotsMenu />
