@@ -38,6 +38,7 @@ const HeaderComponent: FC = () => {
               width: "50px",
               height: "50px",
             }}
+            name="user-menu"
             onClick={() => setShowMenu((prev) => !prev)}
           >
             <IconUser />
